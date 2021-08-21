@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import About from './About';
 import Home from './Home';
+import LoginPage from './pages/Login'
 
 class App extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class App extends React.Component {
                   <Link to="/">Home</Link>
                 </li>
                 <li>
-                <Link to="/about">About</Link>
+                <Link to="/login">Login</Link>
                 </li>
               </ul>
             </nav>
@@ -24,8 +25,8 @@ class App extends React.Component {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/about">
-              <About />
+            <Route path="/login">
+              <LoginPage />
             </Route>
           </Switch>
           </div>
