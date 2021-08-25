@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 
-export const LOGIN = gql`
+export const LOGIN_MUTATION = gql`
 mutation login(
   $email: String!
   $password: String!){
@@ -15,12 +15,13 @@ mutation login(
           id
           verified
           firstName
+          lastName
           isActive
         }
       }
 }`
 
-export const REGISTER = gql`
+export const REGISTER_MUTATION = gql`
 mutation register(
   $username: String!
   $email: String!
@@ -37,7 +38,7 @@ mutation register(
     }
 }`
 
-export const REFRESH_TOKEN = gql`
+export const REFRESH_TOKEN_MUTATION = gql`
 mutation refreshToken($refreshToken: String!){
   refreshToken(refreshToken: $refreshToken){
     token

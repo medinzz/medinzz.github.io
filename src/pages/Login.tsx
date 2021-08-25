@@ -1,29 +1,33 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { LOGIN } from '../helpers/api/mutations/Authentication'
-import { AuthenticationRequestHandler } from '../helpers/api/Request'
+import { LOGIN_MUTATION } from '../helpers/api/mutations/Authentication'
+import { USER_QUERY } from '../helpers/api/queries/Users'
+import { requestHandler, authenticationRequestHandler } from '../helpers/api/Request'
 import currency from '../assets/images/icons/currency.png'
-import {useTokenCookie, useRefreshTokenCookie} from '../helpers/cookie_handlers/AuthCookie'
+import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handlers/AuthCookie'
+import { useUserCookie } from '../helpers/cookie_handlers/UserCookie'
 
 const LoginPage = (props: any) => {
-  
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
-  const [token,setTokenCookie, ] = useTokenCookie()
-  const [,setRefreshTokenCookie, ] = useRefreshTokenCookie()
 
-  const login = async() => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [user, setUserCookie,] = useUserCookie()
+  const [token, setTokenCookie,] = useTokenCookie()
+  const [, setRefreshTokenCookie,] = useRefreshTokenCookie()
+
+  const login = async () => {
     let creds = {
-      email: email, 
+      email: email,
       password: password
     }
-    if(!token){
-      await AuthenticationRequestHandler(LOGIN, creds).then(res => {
-        setTokenCookie(res.tokenAuth.token)
-        setRefreshTokenCookie(res.tokenAuth.refreshToken)
-      })
+    if (!token) {
+      let res = await authenticationRequestHandler(LOGIN_MUTATION, creds)
+      setTokenCookie(res.tokenAuth.token)
+      setRefreshTokenCookie(res.tokenAuth.refreshToken)
+      setUserCookie(res.tokenAuth.user)
     } else {
       alert('you are already logged in!')
+      console.log(user)
     }
   }
   return (
@@ -41,7 +45,7 @@ const LoginPage = (props: any) => {
             </div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" onChange={e => setEmail(e.target.value)}/>
+              <Form.Control type="email" placeholder="Enter email" onChange={e => setEmail(e.target.value)} />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
@@ -49,7 +53,7 @@ const LoginPage = (props: any) => {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+              <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
@@ -58,7 +62,7 @@ const LoginPage = (props: any) => {
               login
             </Button>
           </Form>
-          <div className="col-lg-6"> 
+          <div className="col-lg-6">
             <div className="py-5 row w-100">
               <img className="mx-auto w-50" src={currency} alt="currency.png" />
             </div>

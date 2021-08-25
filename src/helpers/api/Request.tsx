@@ -18,9 +18,7 @@ export const requestHandler = async (token: string, request_body: string, variab
     },
   })
 
-  await graphQLClient.request(request_body, variables).then(res => {
-    return JSON.stringify(res)
-  })
+  return await graphQLClient.request(request_body, variables)
 }
 
 /** 
@@ -28,6 +26,6 @@ export const requestHandler = async (token: string, request_body: string, variab
   * @param {string} request_body The gql body for authentication mutations
   * @param {object} variables Variables that need to be passed to request_body
   **/
-export const AuthenticationRequestHandler = async(request_body: string, variables: object) => {  
+export const authenticationRequestHandler = async(request_body: string, variables: object) => {  
   return await request(endpoint, request_body, variables)
 }

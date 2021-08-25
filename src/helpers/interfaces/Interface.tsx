@@ -1,15 +1,15 @@
 export interface UserObjInterface {
   id: number,
-  first_name: string,
-  last_name: string,
+  firstName: string,
+  lastName: string,
   email: string,
   verified: boolean,
-  is_active: boolean
+  isActive: boolean
 }
 
 export interface AuthTokenObjInterface {
   token: string,
-  refresh_token: string,
+  refreshToken: string,
   success: boolean,
   errors: object,
   user: UserObjInterface

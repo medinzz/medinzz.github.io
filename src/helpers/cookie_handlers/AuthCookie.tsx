@@ -12,7 +12,7 @@ const REFRESH_TOKEN = "refreshToken"
  * 
  * This function returns a react hooks that needs to be declared as follows: 
  * const [token, setTokenCookie, removeTokenCookie] = useTokenCookie()
- * */ 
+ **/ 
 export const useTokenCookie = () => {
 
 	// using cookies to store token
@@ -41,7 +41,7 @@ export const useTokenCookie = () => {
  * 
  * This function returns a react hooks that needs to be declared as follows: 
  * const [refreshToken, setrefreshTokenCookie, removerefreshTokenCookie] = useRefreshTokenCookie()
- * */ 
+ **/ 
 export const useRefreshTokenCookie = () => {
 
 	// using cookies to store refresh token
