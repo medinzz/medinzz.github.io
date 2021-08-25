@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { LOGIN } from '../helpers/api/mutations/Authentication'
-import { authRequest } from '../helpers/api/Request'
+import { AuthenticationRequestHandler } from '../helpers/api/Request'
 import currency from '../assets/images/icons/currency.png'
 import {useTokenCookie, useRefreshTokenCookie} from '../helpers/cookie_handlers/AuthCookie'
 
@@ -9,7 +9,7 @@ const LoginPage = (props: any) => {
   
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-  const [,setTokenCookie, ] = useTokenCookie()
+  const [token,setTokenCookie, ] = useTokenCookie()
   const [,setRefreshTokenCookie, ] = useRefreshTokenCookie()
 
   const login = async() => {
@@ -17,10 +17,14 @@ const LoginPage = (props: any) => {
       email: email, 
       password: password
     }
-    await authRequest(LOGIN, creds).then(res => {
-      setTokenCookie(res.tokenAuth.token)
-      setRefreshTokenCookie(res.tokenAuth.refreshToken)
-    })
+    if(!token){
+      await AuthenticationRequestHandler(LOGIN, creds).then(res => {
+        setTokenCookie(res.tokenAuth.token)
+        setRefreshTokenCookie(res.tokenAuth.refreshToken)
+      })
+    } else {
+      alert('you are already logged in!')
+    }
   }
   return (
     <>
