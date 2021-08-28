@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { LOGIN_MUTATION } from '../helpers/api/mutations/Authentication'
-import { USER_QUERY } from '../helpers/api/queries/Users'
-import { requestHandler, authenticationRequestHandler } from '../helpers/api/Request'
 import currency from '../assets/images/icons/currency.png'
+import { LOGIN_MUTATION } from '../helpers/api/mutations/Authentication'
+import { authenticationRequestHandler } from '../helpers/api/Request'
 import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handlers/AuthCookie'
 import { useUserCookie } from '../helpers/cookie_handlers/UserCookie'
+import InputComponent from '../components/forms/Input'
 
 const LoginPage = (props: any) => {
 
@@ -22,9 +22,15 @@ const LoginPage = (props: any) => {
     }
     if (!token) {
       let res = await authenticationRequestHandler(LOGIN_MUTATION, creds)
-      setTokenCookie(res.tokenAuth.token)
-      setRefreshTokenCookie(res.tokenAuth.refreshToken)
-      setUserCookie(res.tokenAuth.user)
+      if(res.tokenAuth.success){
+        setTokenCookie(res.tokenAuth.token)
+        setRefreshTokenCookie(res.tokenAuth.refreshToken)
+        setUserCookie(res.tokenAuth.user)
+      } else {
+        let nonFieldErrors = res.tokenAuth.errors.nonFieldErrors
+        alert(nonFieldErrors[0].message)
+      }
+      
     } else {
       alert('you are already logged in!')
       console.log(user)
@@ -43,21 +49,40 @@ const LoginPage = (props: any) => {
                 Your next generation social media
               </p>
             </div>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" onChange={e => setEmail(e.target.value)} />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
+            <InputComponent 
+              controlId="formBasicEmail"
+              label="Email address"
+              type="email"
+              placeholder="Enter email" 
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+              /* need to set event to type "any"
+              TODO: find a way to not set it into any
+              */ 
+              onChange={(e: any) => setEmail(e.target.value)} 
+              inputGuide="We'll never share your email with anyone else."
+            />
+            <InputComponent 
+              controlId="formBasicPassword"
+              label="Password"
+              type="password"
+              placeholder="Enter Password" 
+
+              /* need to set event to type "any"
+              TODO: find a way to not set it into any
+              */ 
+              onChange={(e: any) => setPassword(e.target.value)} 
+              inputGuide="You should never share your password."
+            />
+
+            {/* 
+            Use this if you want to have show password functionality
+
+
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Check me out" />
+              </Form.Group> 
+            */}
+
             <Button variant="primary" onClick={login}>
               login
             </Button>

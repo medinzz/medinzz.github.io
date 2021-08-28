@@ -1,0 +1,99 @@
+import React, { useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
+import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handlers/AuthCookie'
+import { authenticationRequestHandler } from '../helpers/api/Request'
+import { REGISTER_MUTATION } from '../helpers/api/mutations/Authentication'
+import InputComponent from '../components/forms/Input'
+
+
+const RegisterPage = (props: any) => {
+  
+  
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [token, setTokenCookie,] = useTokenCookie()
+  const [, setRefreshTokenCookie,] = useRefreshTokenCookie()
+
+  const register = async () => {
+    let creds = {
+      username: username,
+      email: email,
+      password: password
+    }
+    if (!token) {
+      let res = await authenticationRequestHandler(REGISTER_MUTATION, creds)
+      if(res.register.success){
+        setTokenCookie(res.register.token)
+        setRefreshTokenCookie(res.register.refreshToken)
+      } else {
+        let nonFieldErrors = res.register.errors.nonFieldErrors
+        let username_errors = res.register.errors.username
+        let email_errors = res.register.errors.email
+        alert(username_errors[0].message)
+        alert(email_errors[0].message)
+      }
+      
+    } else {
+      alert('you are already registered!')
+    }
+  }
+  return (  
+  <>
+  <Form className="p-5 mx-auto col-lg-6">
+    <div className="text-center row">
+      <h1 className="mx-auto col-8">
+        Welcome to Crypto Media! 
+      </h1>
+      <p className="mx-auto w-50">
+        Please complete the form below and verify your email afterwards.
+      </p>
+    </div>
+    <InputComponent 
+      controlId="formBasicUsername"
+      label="Username"
+      type="text"
+      placeholder="Enter username" 
+
+      /* need to set event to type "any"
+      TODO: find a way to not set it into any
+      */ 
+      onChange={(e: any) => setUsername(e.target.value)} 
+      inputGuide="use a unique username"
+    />
+
+    <InputComponent 
+      controlId="formBasicEmail"
+      label="Email address"
+      type="email"
+      placeholder="Enter email" 
+
+      /* need to set event to type "any"
+      TODO: find a way to not set it into any
+      */ 
+      onChange={(e: any) => setEmail(e.target.value)} 
+      inputGuide="We'll never share your email with anyone else."
+    />
+
+    <InputComponent 
+      controlId="formBasicPassword"
+      label="Password"
+      type="password"
+      placeholder="Enter Password" 
+
+      /* need to set event to type "any"
+      TODO: find a way to not set it into any
+      */ 
+      onChange={(e: any) => setPassword(e.target.value)} 
+      inputGuide="Use a strong password, I haven't made any strong authentication yet."
+    />
+
+
+    <Button variant="primary" onClick={register}>
+      register
+    </Button>
+  </Form>
+  </>)
+}
+
+export default RegisterPage
