@@ -1,14 +1,17 @@
 import { Route, Switch,Redirect } from 'react-router-dom'
-import { useTokenCookie } from './helpers/cookie_handlers/AuthCookie'
+import { useTokenCookie, useRefreshTokenCookie } from './helpers/cookie_handlers/AuthCookie'
 
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
 import VerifyEmailPage from './pages/VerifyEmail'
 import HomePage from './pages/Home'
+import AuthenticatedHomePage from './pages/AuthenticatedHome'
+
 
 const App = () => {
 
-  const [token,,] = useTokenCookie()
+  const [refreshToken ,,] = useRefreshTokenCookie()
+
   return (
     
       /**
@@ -17,19 +20,24 @@ const App = () => {
 
     <Switch>
       <Route exact path="/" render={() => (
-        token ? 
-        (<HomePage />):
-        ( <LoginPage />)
-      )}>
-       
-      </Route>
+        refreshToken ? 
+        (<AuthenticatedHomePage />):
+        ( <HomePage />)
+      )} />
+
       <Route path="/register" render={
         () => (
-        token ? 
+        refreshToken ? 
         (<Redirect to="/"/>) :
         (<RegisterPage />)
-      )}>
-      </Route>
+      )} />
+
+      <Route path="/login" render={
+        () => (
+        refreshToken ? 
+        (<Redirect to="/"/>) :
+        (<LoginPage />)
+      )} />
 
       <Route path="/verify/:token" render={(props) => <VerifyEmailPage {...props} />}>
       </Route>

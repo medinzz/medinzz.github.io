@@ -1,0 +1,20 @@
+#main{
+  left: 0; right: 0;
+}
+.home-title{
+  font-weight: 700;
+  font-size: 5rem;
+}
+.home-subtitle{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 576px) {
+  .home-title{
+    font-size: 3rem;
+  }
+  .home-subtitle{
+    font-size: 1rem;
+  }
+}

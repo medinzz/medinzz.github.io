@@ -8,8 +8,8 @@ import { Link, Redirect } from 'react-router-dom'
 
 
 const RegisterPage = (props: any) => {
-  
-  
+
+
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -24,7 +24,7 @@ const RegisterPage = (props: any) => {
     }
     if (!token) {
       let res = await authenticationRequestHandler(REGISTER_MUTATION, creds)
-      if(res.register.success){
+      if (res.register.success) {
         setTokenCookie(res.register.token)
         setRefreshTokenCookie(res.register.refreshToken)
       } else {
@@ -34,72 +34,76 @@ const RegisterPage = (props: any) => {
         alert(username_errors[0].message)
         alert(email_errors[0].message)
       }
-      
+
     } else {
       alert('you are already registered!')
       return <Redirect to='/'></Redirect>
     }
   }
-  return (  
-  <>
-  <Form className="p-5 mx-auto col-lg-6">
-    <div className="text-center row">
-      <h1 className="mx-auto col-8">
-        Welcome to Crypto Media! 
-      </h1>
-      <p className="mx-auto w-50">
-        Please complete the form below and verify your email afterwards.
-      </p>
-    </div>
-    <InputComponent 
-      controlId="formBasicUsername"
-      label="Username"
-      type="text"
-      placeholder="Enter username" 
+  return (
+    <>
+      <div className="my-5 container-fluid">
+        <div className="p-5 text-center row">
+          <h1 className="home-title mx-auto col-lg-8">
+            Welcome to
+            <br />
+            Crypto Media!
+          </h1>
+          <p className="home-subtitle mx-auto">
+            Please complete the form below and verify your email afterwards.
+          </p>
+        </div>
+        <Form className="px-lg-5 px-4 p-1 mx-auto col-lg-6">
+          <InputComponent
+            controlId="formBasicUsername"
+            label="Username"
+            type="text"
+            placeholder="Enter username"
 
-      /* need to set event to type "any"
-      TODO: find a way to not set it into any
-      */ 
-      onChange={(e: any) => setUsername(e.target.value)} 
-      inputGuide="use a unique username"
-    />
+            /* need to set event to type "any"
+            TODO: find a way to not set it into any
+            */
+            onChange={(e: any) => setUsername(e.target.value)}
+            inputGuide="use a unique username"
+          />
 
-    <InputComponent 
-      controlId="formBasicEmail"
-      label="Email address"
-      type="email"
-      placeholder="Enter email" 
+          <InputComponent
+            controlId="formBasicEmail"
+            label="Email address"
+            type="email"
+            placeholder="Enter email"
 
-      /* need to set event to type "any"
-      TODO: find a way to not set it into any
-      */ 
-      onChange={(e: any) => setEmail(e.target.value)} 
-      inputGuide="We'll never share your email with anyone else."
-    />
+            /* need to set event to type "any"
+            TODO: find a way to not set it into any
+            */
+            onChange={(e: any) => setEmail(e.target.value)}
+            inputGuide="We'll never share your email with anyone else."
+          />
 
-    <InputComponent 
-      controlId="formBasicPassword"
-      label="Password"
-      type="password"
-      placeholder="Enter Password" 
+          <InputComponent
+            controlId="formBasicPassword"
+            label="Password"
+            type="password"
+            placeholder="Enter Password"
 
-      /* need to set event to type "any"
-      TODO: find a way to not set it into any
-      */ 
-      onChange={(e: any) => setPassword(e.target.value)} 
-      inputGuide="Use a strong password, I haven't made any strong authentication yet."
-    />
+            /* need to set event to type "any"
+            TODO: find a way to not set it into any
+            */
+            onChange={(e: any) => setPassword(e.target.value)}
+            inputGuide="Use a strong password, I haven't made any strong authentication yet."
+          />
 
-    <div className="row">
-      <Link to="/" className="col-6">Sign in</Link>
-      
-      <Button variant="primary" className="col-6" onClick={register}>
-        register
-      </Button>
-    </div>
+          <div className="row">
+            <Link to="/login" className="btn btn-light col-6">Sign in</Link>
 
-  </Form>
-  </>)
+            <Button variant="primary" className="col-6" onClick={register}>
+              register
+            </Button>
+          </div>
+
+        </Form>
+      </div>
+    </>)
 }
 
 export default RegisterPage

@@ -6,6 +6,7 @@ import { HashRouter } from 'react-router-dom';
 
 
 import './assets/vendor/bootstrap/bootstrap.min.css'
+import './assets/css/text.css'
 
 ReactDOM.render(
   <React.StrictMode>

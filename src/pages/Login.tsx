@@ -24,7 +24,7 @@ const LoginPage = (props: any) => {
     }
     if (!token) {
       let res = await authenticationRequestHandler(LOGIN_MUTATION, creds)
-      if(res.tokenAuth.success){
+      if (res.tokenAuth.success) {
         setTokenCookie(res.tokenAuth.token)
         setRefreshTokenCookie(res.tokenAuth.refreshToken)
         setUserCookie(res.tokenAuth.user)
@@ -32,7 +32,7 @@ const LoginPage = (props: any) => {
         let nonFieldErrors = res.tokenAuth.errors.nonFieldErrors
         alert(nonFieldErrors[0].message)
       }
-      
+
     } else {
       alert('you are already logged in!')
       console.log(user)
@@ -41,59 +41,63 @@ const LoginPage = (props: any) => {
   return (
     <>
       <section>
-        <div className="p-5 mt-5 row w-100">
-          <Form className="p-5 mx-auto col-lg-6">
-            <div className="text-center row">
-              <h1 className="mx-auto col-8">
-                Crypto Media
-              </h1>
-              <p className="mx-auto w-50">
-                Your next generation social media
-              </p>
-            </div>
-            <InputComponent 
-              controlId="formBasicEmail"
-              label="Email address"
-              type="email"
-              placeholder="Enter email" 
+        <div className="container-fluid">
+          <div className="my-5 row">
+            <Form className="p-lg-5 mt-5 mx-auto col-lg-6">
+              <div className="text-center row">
+                <h1 className="home-title mx-auto">
+                  Crypto Media
+                </h1>
+                <p className="home-subtitle mx-auto">
+                  Your next generation social media
+                </p>
+              </div>
+              <div className="p-5">
+                <InputComponent
+                  controlId="formBasicEmail"
+                  label="Email address"
+                  type="email"
+                  placeholder="Enter email"
 
-              /* need to set event to type "any"
-              TODO: find a way to not set it into any
-              */ 
-              onChange={(e: any) => setEmail(e.target.value)} 
-              inputGuide="We'll never share your email with anyone else."
-            />
-            <InputComponent 
-              controlId="formBasicPassword"
-              label="Password"
-              type="password"
-              placeholder="Enter Password" 
+                  /* need to set event to type "any"
+                  TODO: find a way to not set it into any
+                  */
+                  onChange={(e: any) => setEmail(e.target.value)}
+                  inputGuide="We'll never share your email with anyone else."
+                />
+                <InputComponent
+                  controlId="formBasicPassword"
+                  label="Password"
+                  type="password"
+                  placeholder="Enter Password"
 
-              /* need to set event to type "any"
-              TODO: find a way to not set it into any
-              */ 
-              onChange={(e: any) => setPassword(e.target.value)} 
-              inputGuide="You should never share your password."
-            />
+                  /* need to set event to type "any"
+                  TODO: find a way to not set it into any
+                  */
+                  onChange={(e: any) => setPassword(e.target.value)}
+                  inputGuide="You should never share your password."
+                />
 
-            {/* 
-            Use this if you want to have show password functionality
+                {/* 
+                Use this if you want to have show password functionality
 
 
-              <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group> 
-            */}
-            <div className="row">
-            <Link to="/register" className="col-6">Sign up</Link>
-            <Button variant="primary" className="col-6" onClick={login}>
-              login
-            </Button>
-            </div>
-          </Form>
-          <div className="col-lg-6">
-            <div className="py-5 row w-100">
-              <img className="mx-auto w-50" src={currency} alt="currency.png" />
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" label="Check me out" />
+                  </Form.Group> 
+                */}
+                <div className="row">
+                  <Link to="/register" className="btn btn-light col-6">Sign up</Link>
+                  <Button variant="primary" className="col-6" onClick={login}>
+                    login
+                  </Button>
+                </div>
+              </div>
+            </Form>
+            <div className="col-lg-6">
+              <div className="py-5 row w-100">
+                <img className="mx-auto w-50" src={currency} alt="currency.png" />
+              </div>
             </div>
           </div>
         </div>
