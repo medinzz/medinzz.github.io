@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RegisterPage from './pages/Register';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import './assets/vendor/bootstrap/bootstrap.min.css'
 ReactDOM.render(
   <React.StrictMode>
   <HashRouter>
-    <RegisterPage />
+    <App />
   </HashRouter>
 </React.StrictMode>,
   document.getElementById('root')

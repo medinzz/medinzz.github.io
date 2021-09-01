@@ -6,6 +6,8 @@ import { authenticationRequestHandler } from '../helpers/api/Request'
 import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handlers/AuthCookie'
 import { useUserCookie } from '../helpers/cookie_handlers/UserCookie'
 import InputComponent from '../components/forms/Input'
+import { Link } from 'react-router-dom'
+
 
 const LoginPage = (props: any) => {
 
@@ -82,10 +84,12 @@ const LoginPage = (props: any) => {
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group> 
             */}
-
-            <Button variant="primary" onClick={login}>
+            <div className="row">
+            <Link to="/register" className="col-6">Sign up</Link>
+            <Button variant="primary" className="col-6" onClick={login}>
               login
             </Button>
+            </div>
           </Form>
           <div className="col-lg-6">
             <div className="py-5 row w-100">

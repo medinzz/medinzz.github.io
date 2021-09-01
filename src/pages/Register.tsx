@@ -4,6 +4,7 @@ import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handler
 import { authenticationRequestHandler } from '../helpers/api/Request'
 import { REGISTER_MUTATION } from '../helpers/api/mutations/Authentication'
 import InputComponent from '../components/forms/Input'
+import { Link, Redirect } from 'react-router-dom'
 
 
 const RegisterPage = (props: any) => {
@@ -36,6 +37,7 @@ const RegisterPage = (props: any) => {
       
     } else {
       alert('you are already registered!')
+      return <Redirect to='/'></Redirect>
     }
   }
   return (  
@@ -88,10 +90,14 @@ const RegisterPage = (props: any) => {
       inputGuide="Use a strong password, I haven't made any strong authentication yet."
     />
 
+    <div className="row">
+      <Link to="/" className="col-6">Sign in</Link>
+      
+      <Button variant="primary" className="col-6" onClick={register}>
+        register
+      </Button>
+    </div>
 
-    <Button variant="primary" onClick={register}>
-      register
-    </Button>
   </Form>
   </>)
 }
