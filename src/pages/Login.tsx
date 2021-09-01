@@ -94,7 +94,7 @@ const LoginPage = (props: any) => {
                 </div>
               </div>
             </Form>
-            <div className="col-lg-6">
+            <div className="col-lg-6 mt-5">
               <div className="py-5 row w-100">
                 <img className="mx-auto w-50" src={currency} alt="currency.png" />
               </div>
