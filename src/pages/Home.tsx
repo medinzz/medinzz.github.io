@@ -45,12 +45,12 @@ const HomePage = () => {
                   Interact with people
                 </h1>
               </div>
-              <div className="col-lg-6 d-flex justify-content-center p-5">
+              <div className="col-lg-5 d-flex justify-content-center p-5">
                 <img className="w-75 h-auto" src={interactions} alt="interactions.png" />
               </div>
             </div>
             <div className="row p-5 bg-primary">
-              <div className="col-lg-6 d-flex justify-content-center p-5">
+              <div className="col-lg-5 d-flex justify-content-center p-5">
                 <img className="w-75 h-auto" src={tutorials} alt="tutorials.png" />
               </div>
               <div className="col-lg-6 p-5">
