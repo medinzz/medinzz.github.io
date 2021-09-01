@@ -18,8 +18,8 @@ const HomePage = () => {
               </h1>
               
             </div>
-            <div className="col-lg-5 d-flex justify-content-center p-5 ">
-            <img className="w-100 h-auto" src={peoples} alt="currency.png" />
+            <div className="col-lg-6 d-flex justify-content-center p-5 ">
+              <img className="w-100 h-auto p-5" src={peoples} alt="currency.png" />
             </div>
           </div>
           <div className="row bg-primary p-5 h-50 my-5">
@@ -37,24 +37,23 @@ const HomePage = () => {
             </div>
             <div className="my-5"></div>
           </div>
-
-          <div className="my-5">
+          <div className="mb-5">
             <div className="row p-5">
               <div className="col-lg-6 p-5">
-                <h1 className="home-title pt-5 text-center">
+                <h1 className="home-title text-center">
                   Interact with people
                 </h1>
               </div>
-              <div className="col-lg-5 d-flex justify-content-center p-5">
+              <div className="col-lg-6 d-flex justify-content-center p-5">
                 <img className="w-75 h-auto" src={interactions} alt="interactions.png" />
               </div>
             </div>
             <div className="row p-5 bg-primary">
-              <div className="col-lg-5 d-flex justify-content-center p-5">
+              <div className="col-lg-6 d-flex justify-content-center p-5">
                 <img className="w-75 h-auto" src={tutorials} alt="tutorials.png" />
               </div>
-              <div className="col-lg-6 p-5">
-                <h1 className="home-title pt-5 text-center text-light">
+              <div className="col-lg-6 p-lg-5">
+                <h1 className="home-title text-center text-light">
                   Understand the Crypto
                 </h1>
               </div>
