@@ -17,6 +17,7 @@ mutation login(
           firstName
           lastName
           isActive
+          username
         }
       }
 }`

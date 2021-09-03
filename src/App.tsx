@@ -1,5 +1,5 @@
 import { Route, Switch,Redirect } from 'react-router-dom'
-import { useTokenCookie, useRefreshTokenCookie } from './helpers/cookie_handlers/AuthCookie'
+import { useRefreshTokenCookie } from './helpers/cookie_handlers/AuthCookie'
 
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'

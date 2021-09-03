@@ -28,7 +28,6 @@ const RegisterPage = (props: any) => {
         setTokenCookie(res.register.token)
         setRefreshTokenCookie(res.register.refreshToken)
       } else {
-        let nonFieldErrors = res.register.errors.nonFieldErrors
         let username_errors = res.register.errors.username
         let email_errors = res.register.errors.email
         alert(username_errors[0].message)
@@ -44,16 +43,16 @@ const RegisterPage = (props: any) => {
     <>
       <div className="my-5 container-fluid">
         <div className="p-5 text-center row">
-          <h1 className="home-title mx-auto col-lg-8">
+          <h1 className="mx-auto home-title col-lg-8">
             Welcome to
             <br />
             Crypto Media!
           </h1>
-          <p className="home-subtitle mx-auto">
+          <p className="mx-auto home-subtitle">
             Please complete the form below and verify your email afterwards.
           </p>
         </div>
-        <Form className="px-lg-5 px-4 p-1 mx-auto col-lg-6">
+        <Form className="p-1 px-4 mx-auto px-lg-5 col-lg-6">
           <InputComponent
             controlId="formBasicUsername"
             label="Username"
