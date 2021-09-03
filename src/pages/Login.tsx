@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import currency from '../assets/images/icons/currency.png'
 import { LOGIN_MUTATION } from '../helpers/api/mutations/Authentication'
@@ -38,6 +38,9 @@ const LoginPage = (props: any) => {
       console.log(user)
     }
   }
+  useEffect(() => {
+    window.scrollTo(0,0)
+  })
   return (
     <>
       <section>

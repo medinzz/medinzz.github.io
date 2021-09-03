@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useTokenCookie, useRefreshTokenCookie } from '../helpers/cookie_handlers/AuthCookie'
 import { authenticationRequestHandler } from '../helpers/api/Request'
@@ -39,6 +39,10 @@ const RegisterPage = (props: any) => {
       return <Redirect to='/'></Redirect>
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  })
   return (
     <>
       <div className="my-5 container-fluid">
